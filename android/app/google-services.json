@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "546496965164",
+    "project_id": "bdonner-a6b91",
+    "storage_bucket": "bdonner-a6b91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546496965164:android:468a237737a9819f29bf89",
+        "android_client_info": {
+          "package_name": "com.example.bdonner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546496965164-4l8p2ju8q53je875rpr9s41j2vvc79at.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjZHY0DAXUqC6IT1kxyD5XmZVfY_Ne4pg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546496965164-4l8p2ju8q53je875rpr9s41j2vvc79at.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
