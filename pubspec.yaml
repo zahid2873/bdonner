@@ -39,9 +39,12 @@ dependencies:
   firebase_auth:
   firebase_core:
   firebase_storage:
+  cloud_firestore: 
   fluttertoast:
   country_picker:
-  provider: 
+  provider:
+  shared_preferences:
+  pinput:
 
 dev_dependencies:
   flutter_test:

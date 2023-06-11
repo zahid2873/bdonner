@@ -1,6 +1,8 @@
+import 'package:bdonner/provider/auth_provider.dart';
 import 'package:bdonner/widgets/custom_button.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -100,7 +102,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(
                   height: 50,
                   width: double.infinity,
-                  child: CustomButton(text: "Login", onPressed: (){}),
+                  child: CustomButton(text: "Login", onPressed: (){
+                    sendPhoneNumber();
+                  }),
                 )
               ],
             ),
@@ -108,5 +112,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+  void sendPhoneNumber(){
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    String phoneNumber = phoneController.text.trim();
+    authProvider.signInWithPhone(context, "+${country.phoneCode}${phoneNumber}");
   }
 }
