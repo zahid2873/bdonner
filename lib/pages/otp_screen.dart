@@ -6,6 +6,7 @@ import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/utils.dart';
+import 'home_screen.dart';
 
 class OtpScreen extends StatefulWidget {
   final String verificationId;
@@ -112,18 +113,37 @@ class _OtpScreenState extends State<OtpScreen> {
   }
 
   void verifyOtp(BuildContext context, String userOtp) {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    authProvider.verifyOtp(context: context,
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    ap.verifyOtp(
+        context: context,
         verificationId: widget.verificationId,
         userOtp: userOtp,
         onSuccess: () {
-      
-      authProvider.checkExistingUser().then((value) async{
-          if(value==true){
-
-          } else{
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>UserInformationScreen()));
-          }
+          // checking whether user exists in the db
+          ap.checkExistingUser().then(
+                  (value) async {
+                if (value == true) {
+                  // user exists in our app
+                  ap.getDataFromFirestore().then(
+                        (value) => ap.saveUserDataToSP().then(
+                          (value) => ap.setSignIn().then(
+                            (value) => Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomeScreen(),
+                            ),
+                                (route) => false),
+                      ),
+                    ),
+                  );
+                } else {
+                  // new user
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const UserInformationScreen()),
+                          (route) => false);
+                }
       });
 
         });

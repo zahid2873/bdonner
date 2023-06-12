@@ -45,6 +45,7 @@ dependencies:
   provider:
   shared_preferences:
   pinput:
+  image_picker: 
 
 dev_dependencies:
   flutter_test:
