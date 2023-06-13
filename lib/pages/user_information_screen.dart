@@ -25,14 +25,24 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
   File? image;
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final bioController = TextEditingController();
+  var  bloodGroupController ;
+  var _bloodGroup = [
+    "A(+ve)",
+    "B(+ve)",
+    "O(+ve)",
+    "AB(+ve)",
+    "A(-ve)",
+    "B(-ve)",
+    "O(-ve)",
+    "AB(-ve)"
+  ];
 
   @override
   void dispose() {
     super.dispose();
     nameController.dispose();
     emailController.dispose();
-    bioController.dispose();
+    //bloodGroupController.dispose();
   }
 
   // for selecting image
@@ -102,12 +112,58 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                       ),
 
                       // bio
-                      textFeld(
-                        hintText: "Enter your bio here...",
-                        icon: Icons.edit,
-                        inputType: TextInputType.name,
-                        maxLines: 2,
-                        controller: bioController,
+                      // textFeld(
+                      //   hintText: "Enter your bio here...",
+                      //   icon: Icons.edit,
+                      //   inputType: TextInputType.name,
+                      //   maxLines: 2,
+                      //   controller: bloodGroupController,
+                      // ),
+                      Container(
+                        //padding: EdgeInsets.only(left: 10),
+                       decoration: BoxDecoration(
+                         color: Colors.redAccent.withOpacity(0.5),
+                         borderRadius: BorderRadius.circular(10)
+                       ),
+                        height: 60,
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Container(
+                        margin: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(6),
+                        //height: 20,
+                        //width: 20,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.purple,),
+                                child: Icon(Icons.bloodtype,color: Colors.red,size: 20,)),
+                            DropdownButton(
+
+                              // Initial Value
+                              value: bloodGroupController,
+                              hint: Text('Drop your blood group'),
+
+                              // Down Arrow Icon
+                              icon: const Icon(Icons.keyboard_arrow_down),
+
+                              // Array list of items
+                              items: _bloodGroup.map((String items) {
+                                return DropdownMenuItem(
+                                  value: items,
+                                  child: Text(items,style: TextStyle(fontSize: 14),),
+                                );
+                              }).toList(),
+                              // After selecting the desired option,it will
+                              // change button value to selected value
+                              onChanged: (newValue) {
+                                setState(() {
+                                  bloodGroupController = newValue!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -184,11 +240,12 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
     UserModel userModel = UserModel(
       name: nameController.text.trim(),
       email: emailController.text.trim(),
-      bio: bioController.text.trim(),
+      bloodGroup: bloodGroupController,
       profilePic: "",
       createdAt: "",
       phoneNumber: "",
       uid: "",
+
     );
     if (image != null) {
       ap.saveUserDataToFirebase(
