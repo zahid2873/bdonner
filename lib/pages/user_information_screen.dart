@@ -95,7 +95,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                     children: [
                       // name field
                       textFeld(
-                        hintText: "John Smith",
+                        hintText: "Enter your name",
                         icon: Icons.account_circle,
                         inputType: TextInputType.name,
                         maxLines: 1,
@@ -104,7 +104,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
 
                       // email
                       textFeld(
-                        hintText: "abc@example.com",
+                        hintText: "Enter your email",
                         icon: Icons.email,
                         inputType: TextInputType.emailAddress,
                         maxLines: 1,
